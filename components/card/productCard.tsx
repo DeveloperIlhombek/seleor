@@ -5,7 +5,7 @@ import { IProduct } from '@/types'
 import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 
 interface Props {
@@ -13,7 +13,11 @@ interface Props {
 }
 const ProductCard: FC<Props> = ({ product }) => {
 	const router = useRouter()
-
+	const [mounted, setMounted] = useState(false)
+	useEffect(() => {
+		setMounted(true)
+	}, [])
+	if (!mounted) return null
 	return (
 		<div
 			onClick={() => router.push(`/product/${product._id}`)}
